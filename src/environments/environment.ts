@@ -14,3 +14,15 @@ export const environment = {
  * on performance if an error is thrown.
  */
 // import 'zone.js/plugins/zone-error';  // Included with Angular CLI.
+
+
+export const firebaseConfig = {
+  apiKey: "AIzaSyAVHLmCAdosKdAqE5e1GNPFoJt8kDxejhY",
+  authDomain: "projeto-1-2db67.firebaseapp.com",
+  databaseURL: "https://projeto-1-2db67-default-rtdb.firebaseio.com",
+  projectId: "projeto-1-2db67",
+  storageBucket: "projeto-1-2db67.firebasestorage.app",
+  messagingSenderId: "782398837760",
+  appId: "1:782398837760:web:fec81e276843c63fc3b4e5",
+  measurementId: "G-N27YV1KTY8"
+};
