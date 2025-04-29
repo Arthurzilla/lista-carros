@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { Database, ref, list, set, onValue, remove} from '@angular/fire/database';
+import { Database, ref, list, set, push, onValue, remove, get, child} from '@angular/fire/database';
 import { query } from 'firebase/database';
 import { bindCallback, firstValueFrom, from } from 'rxjs';
 
@@ -12,6 +12,11 @@ export class RealtimeDatabaseService {
   constructor(
     private db: Database = inject(Database)
   ) { }
+  
+  push(path: string, data: any) {
+    const reference = ref(this.db, path);
+    return push(reference, data)
+  }
 
   ref(url: string){
     return ref(this.db, url);
@@ -36,6 +41,7 @@ export class RealtimeDatabaseService {
         const ref = this.ref(url_full)
 
         return set(ref, data);
+        console.log(`dados adicionados com sucesso: ${JSON.stringify(data)}`)
       })()
     )
   }

@@ -7,35 +7,41 @@ import { addIcons } from 'ionicons';
 import { createOutline } from 'ionicons/icons';
 import { trashOutline } from 'ionicons/icons';
 import { RealtimeDatabaseService } from '../firebase/realtime-database.service';
+import { DataSnapshot } from 'firebase/database';
+import { IonFab } from '@ionic/angular';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-lista',
   templateUrl: './lista.page.html',
   styleUrls: ['./lista.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonLabel, IonItem, IonList, IonButton, IonIcon]
+  imports: [RouterLink, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonLabel, IonItem, IonList, IonButton, IonIcon]
 })
 export class ListaPage implements OnInit {
 
   public dados:Array<any> = [];
 
-  constructor(
-    public rt: RealtimeDatabaseService
-  ) {
+  constructor(public rt: RealtimeDatabaseService) {
     addIcons({createOutline, trashOutline})
    }
 
   ngOnInit() {
-    this.load();
+    this.load(); // Carregar os dados assim que a página for inicializada
   }
 
+    // Função que carrega os dados do Firebase
   load(){
-    this.rt.query('lista', (snapshot:any) => {
-      this.dados = Object(snapshot.val()).map((item:any, key:number) => {
-        item.id = key;
-        return item;
-      }).filter((item:any) => item != null)
+
+    this.rt.query('lista', (snapshot: DataSnapshot) => {
+      if (snapshot.exists()){
+        this.dados = Object.keys(snapshot.val()).map((key) => ({
+          id: key,
+          ...snapshot.val()[key]
+        }))
+      }
     })
+    
   }
 
   excluir(id:number){

@@ -13,18 +13,18 @@
 
   <ion-list>
     <ion-item>
-      <ion-input label="NOME" labelPlacement="floating" placeholder="insira aqui">  </ion-input>
+      <ion-input  [(ngModel)]="carro.nome" label="NOME" labelPlacement="floating" placeholder="insira aqui"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-input label="MODELO" labelPlacement="floating" placeholder="insira aqui">  </ion-input>
+      <ion-input [(ngModel)]="carro.modelo" label="MODELO" labelPlacement="floating" placeholder="insira aqui">  </ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-input label="ANO" labelPlacement="floating" placeholder="insira aqui">  </ion-input>
+      <ion-input [(ngModel)]="carro.ano" label="ANO" labelPlacement="floating" placeholder="insira aqui">  </ion-input>
     </ion-item>
 
-    <ion-button>encaminhar</ion-button>
+    <ion-button expand="block" (click)="salvar()">encaminhar</ion-button>
   </ion-list>
 
   
