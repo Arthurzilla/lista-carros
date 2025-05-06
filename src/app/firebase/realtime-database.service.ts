@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { Database, ref, list, set, push, onValue, remove, get, child} from '@angular/fire/database';
+import { Database, ref, list, set, push, onValue, remove, get, child, update} from '@angular/fire/database';
 import { query } from 'firebase/database';
 import { bindCallback, firstValueFrom, from } from 'rxjs';
 
@@ -52,6 +52,12 @@ export class RealtimeDatabaseService {
 
   remove(url: string){
     return remove(this.ref(url));
+  }
+
+  // Novo método para atualizar dados
+  update(path: string, data: any) {
+    const reference = ref(this.db, path);
+    return update(reference, data);
   }
 }
 
